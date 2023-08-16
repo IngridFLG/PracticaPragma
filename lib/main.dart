@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:prueba_pragma/infrastructure/models/cats_model.dart';
 import 'package:prueba_pragma/presentation/screens/cats_screen.dart';
+import 'package:prueba_pragma/presentation/screens/cats_screen2.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: CatsScreen(),
+      home: CatsScreen2(),
     );
   }
 }
