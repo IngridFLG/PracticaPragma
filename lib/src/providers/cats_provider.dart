@@ -14,7 +14,7 @@ class CatsProvider extends ChangeNotifier {
       _catsData = data;
       notifyListeners();
     } catch (error) {
-      print("Error fetching cat data: $error");
+      throw Exception("Error fetching cat data: $error");
     }
   }
 }
