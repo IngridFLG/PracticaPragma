@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:prueba_pragma/src/providers/cats_provider.dart';
-import 'package:prueba_pragma/src/screens/home/cats_screen2.dart';
+import 'package:prueba_pragma/src/router/app_router.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,13 +18,13 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => CatsProvider())
       ],
-      child: MaterialApp(
+      child: MaterialApp.router(
         title: 'Practica Pragma',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           useMaterial3: true,
         ),
-        home: CatsScreen2(),
+        routerConfig: appRouter,
       ),
     );
   }
