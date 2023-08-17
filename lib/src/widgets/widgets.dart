@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:prueba_pragma/src/models/cats_model.dart';
 import 'package:prueba_pragma/src/screens/home/detail_screen.dart';
@@ -68,7 +69,16 @@ class CatImage extends StatelessWidget {
       future: CatsService().validateImageURL(cat.referenceImageId),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const CircularProgressIndicator();
+          return SpinPerfect(
+            duration: const Duration(milliseconds: 400),
+            child: const Image(
+              image: AssetImage('404-error-found-cat-is-sitting-holding-plug-from-outlet_626340-65.png'),
+                fit: BoxFit.cover,
+                width: 20,
+                height: 20,
+              )
+          
+          );
         }
 
         if (snapshot.hasError || snapshot.data == null) {

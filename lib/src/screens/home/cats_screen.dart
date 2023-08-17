@@ -24,17 +24,20 @@ class CatsScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Cats'),
       ),
-      body: catsProvider.isInitialized
-          ? ListView.builder(
-              itemCount: catsData.length,
-              itemBuilder: (context, index) {
-                final cat = catsData[index];
-                return CatCard(cat: cat);
-              },
-            )
-          : const Center(
-              child: CircularProgressIndicator(),
-            ),
+      body: Container(
+        
+        child: catsProvider.isInitialized
+            ? ListView.builder(
+                itemCount: catsData.length,
+                itemBuilder: (context, index) {
+                  final cat = catsData[index];
+                  return CatCard(cat: cat);
+                },
+              )
+            : const Center(
+                child: CircularProgressIndicator(),
+              ),
+      ),
     );
   }
 }
