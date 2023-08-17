@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:prueba_pragma/src/models/cats_model.dart';
+import 'package:prueba_pragma/src/service/cats_service.dart';
 
 class CatCard extends StatelessWidget {
   final CatsModel cat;
 
-  const CatCard({super.key, required this.cat});
+  CatCard({required this.cat});
 
   @override
   Widget build(BuildContext context) {
@@ -15,18 +16,31 @@ class CatCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(cat.name),
-              TextButton(onPressed: () {}, child: const Text('Mas...'))
+              TextButton(onPressed: () {}, child: Text('Mas...')),
             ],
           ),
-          Image.network(
-            'https://cdn2.thecatapi.com/images/${cat.referenceImageId}.jpg',
-            width: double.infinity, // Ajusta el ancho de la imagen
-            height: 200, // Ajusta la altura de la imagen
-            fit: BoxFit.cover, // Ajusta la forma en que la imagen se ajusta al espacio
+          FutureBuilder<String?>(
+            future: CatsService().validateImageURL(cat.referenceImageId),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return CircularProgressIndicator();
+              }
+
+              if (snapshot.hasError || snapshot.data == null) {
+                return Text('Error al cargar la imagen');
+              }
+
+              return Image.network(
+                snapshot.data!, // Usa el valor solo si no es null
+                width: double.infinity,
+                height: 200,
+                fit: BoxFit.cover,
+              );
+            },
           ),
-          Row()
         ],
       ),
     );
   }
 }
+
