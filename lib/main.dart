@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:prueba_pragma/src/providers/cats_provider.dart';
-import 'package:prueba_pragma/src/screens/cats_screen2.dart';
+import 'package:prueba_pragma/src/screens/home/cats_screen2.dart';
 
 void main() {
   runApp(const MyApp());
