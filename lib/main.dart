@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:prueba_pragma/infrastructure/models/cats_model.dart';
-import 'package:prueba_pragma/presentation/screens/cats_screen.dart';
-import 'package:prueba_pragma/presentation/screens/cats_screen2.dart';
+import 'package:provider/provider.dart';
+import 'package:prueba_pragma/src/providers/cats_provider.dart';
+import 'package:prueba_pragma/src/screens/cats_screen2.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,14 +13,20 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Practica Pragma',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => CatsProvider())
+      ],
+      child: MaterialApp(
+        title: 'Practica Pragma',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
+        ),
+        home: CatsScreen2(),
       ),
-      home: CatsScreen2(),
     );
   }
 }
