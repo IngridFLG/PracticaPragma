@@ -5,7 +5,7 @@ import 'package:prueba_pragma/src/service/cats_service.dart';
 class CatCard extends StatelessWidget {
   final CatsModel cat;
 
-  CatCard({required this.cat});
+  const CatCard({super.key, required this.cat});
 
   @override
   Widget build(BuildContext context) {

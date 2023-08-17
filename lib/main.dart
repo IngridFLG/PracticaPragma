@@ -22,7 +22,6 @@ class MyApp extends StatelessWidget {
         title: 'Practica Pragma',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
         home: CatsScreen2(),
