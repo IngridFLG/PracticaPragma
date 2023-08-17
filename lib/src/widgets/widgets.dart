@@ -77,7 +77,6 @@ class CatImage extends StatelessWidget {
                 width: 20,
                 height: 20,
               )
-          
           );
         }
 
