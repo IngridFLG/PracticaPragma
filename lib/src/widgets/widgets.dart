@@ -1,7 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:prueba_pragma/src/models/cats_model.dart';
-import 'package:prueba_pragma/src/screens/home/detail_screen.dart';
+import 'package:prueba_pragma/src/screens/details/detail_screen.dart';
 import 'package:prueba_pragma/src/service/cats_service.dart';
 
 class CatCard extends StatelessWidget {
