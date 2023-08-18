@@ -11,7 +11,7 @@ class CatsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
+
     final catsProvider = Provider.of<CatsProvider>(context, listen: false);
 
     if (!catsProvider.isInitialized) {
@@ -22,24 +22,41 @@ class CatsScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Cats'),
+        title: const Text('Catbreeds'),
+        centerTitle: true,
       ),
-      body: Container(
-        
-        child: catsProvider.isInitialized
-            ? ListView.builder(
-                itemCount: catsData.length,
-                itemBuilder: (context, index) {
-                  final cat = catsData[index];
-                  return CatCard(cat: cat);
-                },
-              )
-            : const Center(
-                child: CircularProgressIndicator(),
+      body: Column(
+        children: [
+          Container(
+            constraints: const BoxConstraints(minHeight: 50.0),
+            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+            child: const TextField(
+              decoration: InputDecoration(
+                hintText: 'Search cats...',
+                prefixIcon: Icon(Icons.search), // Icono de búsqueda
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(0)),
+                ),
+                contentPadding: EdgeInsets.symmetric(vertical: 10.0),
               ),
+            ),
+          ),
+          catsProvider.isInitialized
+              ? Expanded(
+                  child: ListView.builder(
+                    itemCount: catsData.length,
+                    itemBuilder: (context, index) {
+                      final cat = catsData[index];
+                      return CatCard(cat: cat);
+                    },
+                  ),
+                )
+              : const Center(
+                  child: CircularProgressIndicator(),
+                ),
+        ],
       ),
     );
   }
 }
-
 

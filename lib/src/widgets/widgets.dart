@@ -54,8 +54,7 @@ class CatCard extends StatelessWidget {
 }
 
 class CatImage extends StatelessWidget {
-  const CatImage({
-    super.key,
+  const CatImage({super.key, 
     required this.cat,
     required this.media,
   });
@@ -70,18 +69,22 @@ class CatImage extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return SpinPerfect(
-            duration: const Duration(milliseconds: 400),
-            child: const Image(
-              image: AssetImage('404-error-found-cat-is-sitting-holding-plug-from-outlet_626340-65.png'),
-                fit: BoxFit.cover,
-                width: 20,
-                height: 20,
-              )
+            duration: const Duration(milliseconds: 1400), 
+            animate: true,
+            child: Image.asset(
+              'assets/images/vueltasCat.png', 
+              height: media.height * 0.2,
+              fit: BoxFit.cover,
+            ),
           );
         }
 
         if (snapshot.hasError || snapshot.data == null) {
-          return const Text('Error al cargar la imagen');
+          return Image.asset(
+            'assets/images/gatoError.png', // Asegúrate de que la ruta sea correcta
+            height: media.height * 0.3,
+            fit: BoxFit.cover,
+          );
         }
 
         return Image.network(
