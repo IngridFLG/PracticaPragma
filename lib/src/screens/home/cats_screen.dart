@@ -7,18 +7,15 @@ import 'package:prueba_pragma/src/widgets/widgets.dart';
 class CatsScreen extends StatelessWidget {
   static const String name = 'ScreenHome';
 
-  const CatsScreen({super.key});
+  const CatsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
     final catsProvider = Provider.of<CatsProvider>(context, listen: false);
 
     if (!catsProvider.isInitialized) {
       catsProvider.fetchCatsData();
     }
-
-    final List<CatsModel> catsData = catsProvider.catsData;
 
     return Scaffold(
       appBar: AppBar(
@@ -30,10 +27,14 @@ class CatsScreen extends StatelessWidget {
           Container(
             constraints: const BoxConstraints(minHeight: 50.0),
             padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
-            child: const TextField(
-              decoration: InputDecoration(
+            child: TextField(
+              onChanged: (value) {
+                final List<CatsModel> filteredCats = catsProvider.getFilteredCats(value);
+                catsProvider.updateFilteredCats(filteredCats);
+              },
+              decoration: const InputDecoration(
                 hintText: 'Search cats...',
-                prefixIcon: Icon(Icons.search), // Icono de búsqueda
+                prefixIcon: Icon(Icons.search),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(0)),
                 ),
@@ -43,11 +44,16 @@ class CatsScreen extends StatelessWidget {
           ),
           catsProvider.isInitialized
               ? Expanded(
-                  child: ListView.builder(
-                    itemCount: catsData.length,
-                    itemBuilder: (context, index) {
-                      final cat = catsData[index];
-                      return CatCard(cat: cat);
+                  child: Consumer<CatsProvider>(
+                    builder: (context, provider, child) {
+                      final List<CatsModel> filteredCats = provider.catsData;
+                      return ListView.builder(
+                        itemCount: filteredCats.length,
+                        itemBuilder: (context, index) {
+                          final cat = filteredCats[index];
+                          return CatCard(cat: cat);
+                        },
+                      );
                     },
                   ),
                 )
@@ -59,4 +65,3 @@ class CatsScreen extends StatelessWidget {
     );
   }
 }
-
