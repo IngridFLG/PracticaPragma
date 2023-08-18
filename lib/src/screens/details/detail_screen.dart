@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:prueba_pragma/src/models/cats_model.dart';
 import 'package:prueba_pragma/src/widgets/widgets.dart';
 
@@ -26,6 +27,7 @@ class ScreenDetails extends StatelessWidget {
         children: [
           Align(
             alignment: Alignment.center,
+            
             child: CatImage(cat: cat, media: media),
           ),
           const SizedBox(height: 20),
@@ -40,25 +42,55 @@ class ScreenDetails extends StatelessWidget {
                   children: [
                     Text(cat.description, style: commonStyle,),
                     espacio,
-                    Text('Origen: ${cat.origin}', style: commonStyle,),
+                    imageSvgText(
+                      text: 'Origen: ${cat.origin}', 
+                      imageSvg: 'assets/images/emoji-flags.svg',
+                      ),
                     espacio,
-                    Text('Inteligencia: ${cat.intelligence}', style: commonStyle,),
+                    imageSvgText(
+                      text: 'Inteligencia: ${cat.intelligence}', 
+                      imageSvg: 'assets/images/brain-bold.svg',
+                      ),
                     espacio,
-                    Text('Adaptabilidad: ${cat.adaptability}', style: commonStyle,),
+                    imageSvgText(
+                      text: 'Adaptabilidad: ${cat.adaptability}', 
+                      imageSvg: 'assets/images/puzzle.svg',
+                      ),
                     espacio,
-                    Text('Nivel de afeccion: ${cat.affectionLevel}', style: commonStyle,),
+                    imageSvgText(
+                      text: 'Nivel de afeccion: ${cat.affectionLevel}', 
+                      imageSvg: 'assets/images/heart.svg',
+                      ),
                     espacio,
-                    Text('Niño amigable: ${cat.childFriendly}', style: commonStyle,),
+                    imageSvgText(
+                      text: 'Niño amigable: ${cat.childFriendly}', 
+                      imageSvg: 'assets/images/child.svg',
+                      ),
                     espacio,
-                    Text('Nivel de energia: ${cat.energyLevel}', style: commonStyle,),
+                    imageSvgText(
+                      text: 'Nivel de energia: ${cat.energyLevel}', 
+                      imageSvg: 'assets/images/energy.svg',
+                      ),
                     espacio,
-                    Text('Aseo: ${cat.grooming}', style: commonStyle,),
+                    imageSvgText(
+                      text: 'Aseo: ${cat.grooming}', 
+                      imageSvg: 'assets/images/clean-hands.svg',
+                      ),
                     espacio,
-                    Text('Esperanza de vida: ${cat.lifeSpan}', style: commonStyle,),
+                    imageSvgText(
+                      text: 'Esperanza de vida: ${cat.lifeSpan}', 
+                      imageSvg: 'assets/images/life-in-the-balance.svg',
+                      ),
                     espacio,
-                    Text('Problemas de salud: ${cat.healthIssues}', style: commonStyle,),
+                    imageSvgText(
+                      text: 'Problemas de salud: ${cat.healthIssues}', 
+                      imageSvg: 'assets/images/baseline-sick.svg',
+                      ),
                     espacio,
-                    Text('raro: ${cat.rare}', style: commonStyle,),
+                    imageSvgText(
+                      text: 'raro: ${cat.rare}', 
+                      imageSvg: 'assets/images/fungus.svg',
+                      ),
                   ],
                 ),
               ),
@@ -66,6 +98,37 @@ class ScreenDetails extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class imageSvgText extends StatelessWidget {
+
+  final String text;
+  final String imageSvg;
+
+  const imageSvgText({super.key, required this.text, required this.imageSvg});
+
+  @override
+  Widget build(BuildContext context) {
+    const commonStyle = TextStyle(
+      fontSize: 17,
+      fontWeight: FontWeight.bold
+    );
+    return Row(
+      children: [
+        SvgPicture.asset(
+          imageSvg,
+          width: 25,
+        ),
+        const SizedBox(
+          width: 10,
+        ),
+        Text(
+          text,
+          style: commonStyle
+        ),
+      ],
     );
   }
 }

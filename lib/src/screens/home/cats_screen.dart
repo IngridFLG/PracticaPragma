@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:prueba_pragma/src/providers/cats_provider.dart';
 import 'package:prueba_pragma/src/models/cats_model.dart';
+import 'package:prueba_pragma/src/screens/details/detail_screen.dart';
 import 'package:prueba_pragma/src/widgets/widgets.dart';
 
 class CatsScreen extends StatelessWidget {
@@ -51,7 +52,26 @@ class CatsScreen extends StatelessWidget {
                         itemCount: filteredCats.length,
                         itemBuilder: (context, index) {
                           final cat = filteredCats[index];
-                          return CatCard(cat: cat);
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                PageRouteBuilder(
+                                  transitionDuration: const Duration(milliseconds: 500),
+                                  pageBuilder: (context, animation, secondaryAnimation) {
+                                    return FadeTransition(
+                                      opacity: animation,
+                                      child: ScreenDetails(cat: cat),
+                                    );
+                                  },
+                                ),
+                              );
+                            },
+                            child: Hero(
+                              tag: 'cat_image_${cat.id}', 
+                              child: CatCard(cat: cat),
+                            ),
+                          );
                         },
                       );
                     },
