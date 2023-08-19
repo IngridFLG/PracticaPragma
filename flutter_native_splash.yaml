@@ -1,6 +1,7 @@
 flutter_native_splash:
   image: assets/images/splash_image.png
   color: "#D7BDE2"
+  branding: assets/images/CatBreeds.png
   android: true
   ios: true
 
@@ -8,3 +9,5 @@ flutter_native_splash:
   align: center  # Alineación del contenido en el centro
   image_fit: contain  # Ajustar la imagen al tamaño de la pantalla
   image_fill_color: "#FFFFFF"  # Color de fondo detrás de la imagen
+
+
