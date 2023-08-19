@@ -12,10 +12,12 @@ class CatsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final catsProvider = Provider.of<CatsProvider>(context, listen: false);
+    final catsProvider = Provider.of<CatsProvider>(context);
 
+    // Verificar si los datos ya se han cargado
     if (!catsProvider.isInitialized) {
-      catsProvider.fetchCatsData();
+      // Asegurarse de que fetchCatsData se llame solo una vez al inicio
+      Future.microtask(() => catsProvider.fetchCatsData());
     }
 
     return Scaffold(
